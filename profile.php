@@ -138,11 +138,11 @@ $user_details = getProfileDetails($_SESSION['account_id']);
                     if($user_details['avatar']){
                         ?>
                     <img src="images/<?= $user_details['avatar'] ?>" alt="<?= $user_details['avatar'] ?>"
-                        class="profile-photo d-block">
+                        class="d-block">
                     <?php 
                     }else{
                         ?>
-                    <i class=" fa-regular fa-user d-block text-center rounded"></i>
+                    <i class=" fa-regular fa-user d-block text-center"></i>
                     <?php 
                     }
                 ?>

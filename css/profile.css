@@ -4,15 +4,11 @@
     font-size: 9rem !important;
     margin: auto;
     padding: 15px 0 0 0;
-    border:solid 2px black !important;
-    border-radius: 50% !important;
     background-color: rgb(231, 231, 231);
 }
 .avatar-icon img{
     width: 12rem;
     height: 12rem;
     margin: auto;
-    border: solid 2px black;
-    border-radius: 50%;
     margin-bottom: 15px;
 }
