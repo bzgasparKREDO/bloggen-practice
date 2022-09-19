@@ -1,0 +1,17 @@
+main.container {
+    margin-top: 80px;
+    margin-bottom: 100px;
+}
+.form-control, .form-select {
+    outline: none;
+    border: none;
+    border-bottom: 2px solid black !important;
+    border-radius: 0;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: none;
+}
