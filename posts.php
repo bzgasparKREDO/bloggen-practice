@@ -5,7 +5,7 @@ include 'connection.php';
 function displayUserPosts($user_id){
     $conn = connection();
 
-    $sql = "SELECT * FROM posts INNER JOIN categories ON categories.category_id = posts.category_id WHERE account_id = $user_id ORDER BY date_posted";
+    $sql = "SELECT * FROM posts INNER JOIN categories ON categories.category_id = posts.category_id WHERE account_id = $user_id ORDER BY date_posted DESC";
 
     if($result = $conn->query($sql)){
         if($result->num_rows > 0){
@@ -70,7 +70,7 @@ function displayUserPosts($user_id){
         </div>
         <table class="table table-hover table-striped mt-3">
             <thead class="table-dark">
-                <th>Post ID</th>
+                <th>ID</th>
                 <th>Title</th>
                 <th>Category</th>
                 <th>Date Posted</th>

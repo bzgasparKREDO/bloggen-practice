@@ -15,17 +15,14 @@ function getPassword($account_id) {
 
 function updateProfile($account_id){
     $conn = connection();
-    $password = $_POST['password'];
-    $db_password = getPassword($account_id);
 
-    if(password_verify($password, $db_password)){
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $address = $_POST['address'];
-        $contact_number = $_POST['contact_number'];
-        $username = $_POST['username'];
-        $avatar_name = $_FILES['avatar']['name'];
-        $avatar_tmp = $_FILES['avatar']['tmp_name'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $address = $_POST['address'];
+    $contact_number = $_POST['contact_number'];
+    $username = $_POST['username'];
+    $avatar_name = $_FILES['avatar']['name'];
+    $avatar_tmp = $_FILES['avatar']['tmp_name'];
 
         $sql = "UPDATE accounts INNER JOIN users ON users.account_id = accounts.account_id
                 SET users.first_name = '$first_name',
@@ -48,14 +45,11 @@ function updateProfile($account_id){
                 $destination = "images/$avatar_name";
                 move_uploaded_file($avatar_tmp, $destination);
             }
-            header("location: users.php");
+            header("location: profile.php");
             exit;
         } else {
             die("Error: " . $conn->error);
-        }
-    } else {
-        echo "<div class='alert alert-danger text-center fw-bold' role='alert'>Incorrect password.</div>";
-    }    
+        }  
 }
 function getProfileDetails($profile_id){
     $conn = connection();
@@ -82,6 +76,7 @@ $user_details = getProfileDetails($_SESSION['account_id']);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
 </head>
 
 <body>
@@ -135,15 +130,22 @@ $user_details = getProfileDetails($_SESSION['account_id']);
                     <input type="text" name="username" id="username" class="form-control mb-3" required
                         value="<?= $user_details['username'] ?>">
 
-                    <label for="password" class="small form-label">Password</label>
-                    <input type="password" name="password" id="password" class="form-control"
-                        placeholder="Enter password to confirm" required>
-
                     <button type="submit" class="btn btn-info text-white text-uppercase mt-4 w-100"
                         name="btn_update">Update</button>
                 </div>
-                <div class="col-4">
-                    <img src="images/<?= $user_details['avatar'] ?>" class='w-100 mb-2'>
+                <div class="col-4 avatar-icon">
+                    <?php 
+                    if($user_details['avatar']){
+                        ?>
+                    <img src="images/<?= $user_details['avatar'] ?>" alt="<?= $user_details['avatar'] ?>"
+                        class="profile-photo d-block">
+                    <?php 
+                    }else{
+                        ?>
+                    <i class=" fa-regular fa-user d-block text-center rounded"></i>
+                    <?php 
+                    }
+                ?>
                     <input type="file" name="avatar" class="form-control" aria-label="Choose Photo" accept="image/*">
                 </div>
             </div>

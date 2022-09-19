@@ -21,24 +21,6 @@ function displayCategories(){
     }
 }
 
-function displayUsers(){
-    $conn = connection();
-    $sql = "SELECT account_id, username,`role` FROM accounts";
-    if($result = $conn->query($sql)){
-        if($result->num_rows > 0){
-            while($row = $result->fetch_assoc()){
-                if ($row['account_id'] == $_SESSION['account_id']){
-                    echo "<option selected value='".$row['account_id']."'>".$row['username']."</option>";
-                    break;
-                }
-            }
-        }else{
-            echo "<option value='' hidden>No Records Found</option>";
-        }
-    } else{
-        die("Error: " . $conn->error);
-    }
-}
 
 function addPost(){
     $conn = connection();
@@ -46,7 +28,7 @@ function addPost(){
     $date_posted = $_POST['date_posted'];
     $category_id = $_POST['category_id'];
     $message = $_POST['message'];
-    $author_id = $_POST['author_id'];
+    $author_id = $_SESSION['account_id'];
 
     $sql = "INSERT INTO posts (post_title, post_message, date_posted, account_id, category_id) VALUES ('$title','$message', '$date_posted', $author_id, $category_id)";
     
@@ -74,12 +56,12 @@ if(isset($_POST['add_post'])){
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <header>
-    <?php 
+        <?php 
         if($_SESSION['role'] == "U"){
             include 'user-menu.php';
         } else {
@@ -87,7 +69,7 @@ if(isset($_POST['add_post'])){
         }
         ?>
         <div class="container-fluid bg-primary bg-gradient text-white p-4 ps-5">
-            <h2 class="display-2"><i class="fas fa-pen-nib mx-1"></i>Post</h2>        
+            <h2 class="display-2"><i class="fas fa-pen-nib mx-1"></i>Post</h2>
         </div>
     </header>
     <main class="container w-50 mx-auto">
@@ -98,27 +80,23 @@ if(isset($_POST['add_post'])){
 
         <div class="col-10 mx-auto">
             <form method="post">
+                
+            <label for="title" class="form-label">Title</label>
                 <input type="text" name="title" class="form-control mb-3" placeholder="TITLE" required autofocus>
 
+                <label for="date_posted" class="form-label">Date</label>
                 <input type="date" name="date_posted" class="form-control mb-3" required>
 
+                <label for="category_id" class="form-label">Catergory</label>
                 <select name="category_id" class="form-select mb-3" required>
                     <?php
                     displayCategories();
                     ?>
                 </select>
+                <label for="message" class="form-label">Message</label>
+                <textarea name="message" style="border: solid 2px black ;" class="form-control mb-3" rows="7"
+                    placeholder="MESSAGE"></textarea>
 
-                <textarea name="message" style="border:none;" class="form-control mb-3" rows="7" placeholder="MESSAGE"></textarea>
-
-                <div class="input-group">
-                    <span class="input-group-text bg-dark bg-opacity-75 rounded-0 text-white">Author</span>
-                    <select name="author_id" class="form-select">
-                        <?php
-                        displayUsers();
-                        ?>
-                    </select>
-                </div>
-                
                 <button type="submit" name="add_post" class="btn btn-primary w-100 mt-5 text-uppercase">Post</button>
             </form>
         </div>

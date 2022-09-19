@@ -59,35 +59,39 @@ function register(){
                 }
                 ?>
                 <form action="" method="post">
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <label for="first-name" class="form-label">First Name <span>*</span></label>
-                            <input type="text" name="first_name" id="first_name" class="form-control" required
-                                autofocus>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="last-name" class="form-label">Last Name <span>*</span></label>
-                            <input type="text" name="last_name" id="last-name" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="address" class="form-label">Address</label>
-                        <input type="text" name="address" id="address" class="form-control">
-                    </div>
-                    <div class="mb-4">
-                        <label for="contact-number" class="form-label">Contact Number <span>*</span></label>
-                        <input type="text" name="contact_number" id="contact-number" class="form-control" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="username" class="form-label">Username <span>*</span></label>
-                        <input type="text" name="username" id="username" class="form-control" maxlength="15" required>
-                    </div>
-                    <div class="mb-5">
-                        <label for="password" class="form-label">Password <span style="color: crimson">*</span></label>
-                        <input type="password" name="password" id="password" class="form-control" minlength="8"
-                            required>
-                    </div>
                     <div class="row">
+                        <div class="col-6  mb-3">
+                            <label for="first-name" class=" form-label">First Name</label>
+                            <input type="text" name="first_name" id="first-name" class="form-control" required autofocus
+                                placeholder="First Name">
+                        </div>
+                        <div class="col-6  mb-3">
+                            <label for="last-name" class=" form-label">Last Name</label>
+                            <input type="text" name="last_name" id="last-name" class="form-control" required
+                                placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12  mb-3">
+                            <label for="address" class=" form-label">Address</label>
+                            <input type="text" name="address" id="address" class="form-control" required
+                                placeholder="Address">
+                        </div>
+                        <div class="col-12  mb-3">
+                            <label for="contact-number" class=" form-label">Contact Number</label>
+                            <input type="text" name="contact_number" id="contact-number" class="form-control" required
+                                placeholder="Contact Number">
+                        </div>
+                    </div>
+
+                    <label for="username" class=" form-label">Username</label>
+                    <input type="text" name="username" id="username" class="form-control mb-3" required
+                        placeholder="Username">
+
+                    <label for="password" class=" form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password"
+                        required>
+                    <div class="row mt-3">
                         <div class="col">
                             <button type="submit" name="btn_register"
                                 class="btn btn-success px-5 py-2 text-uppercase">Register</button>

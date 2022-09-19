@@ -66,7 +66,7 @@ function updatePost($post_id){
     $title = $_POST['title'];
     $date_posted = $_POST['date_posted'];
     $category_id = $_POST['category_id'];
-    $author_id = $_POST['author_id'];
+    $author_id = $_SESSION['account_id'];
     $message = $_POST['message'];
 
     $sql = "UPDATE posts 
@@ -78,7 +78,7 @@ function updatePost($post_id){
             WHERE post_id = $post_id";
 
     if($conn->query($sql)){
-        header("location: posts.php");
+        header("location: post-details.php?post_id=".$post_id);
         exit;
     }else{
         die("Error: " . $conn->error);
@@ -135,17 +135,8 @@ if(isset($_POST['btn_update'])){
                     ?>
                 </select>
 
-                <textarea name="message" class="form-control mb-3" rows="7"
+                <textarea name="message" style="border: solid 2px black ;" class="form-control mb-3" rows="7"
                     placeholder="MESSAGE"><?= $post_row['post_message'] ?></textarea>
-
-                <div class="input-group">
-                    <span class="input-group-text bg-dark rounded-0 text-white">Author</span>
-                    <select name="author_id" class="form-select">
-                        <?php    
-                        displayUsers();
-                        ?>
-                    </select>
-                </div>
 
                 <button type="submit" name="btn_update" class="btn btn-dark w-100 mt-5 text-uppercase">Update</button>
             </form>

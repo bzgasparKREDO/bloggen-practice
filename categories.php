@@ -109,10 +109,10 @@ function deleteCategory($category_id){
                     $category_id = $_POST['category_id'];
                     $category = getCategory($category_id);
                     ?>
-            <form method="post">
+            <form method="post" class="bg-success p-3 rounded">
                 <div class="row">
                     <div class="col text-end">
-                        <label for="category-name" class="mt-2">Edit Category</label>
+                        <label for="category-name" class="mt-2 text-white fw-bold">Update Category</label>
                     </div>
                     <div class="col ps-0">
                         <input type="text" name="category_id_u" hidden value="<?= $category['category_id'] ?>">
@@ -121,7 +121,7 @@ function deleteCategory($category_id){
                     </div>
                     <div class="col px-0">
                         <button type="submit" name="btn_update"
-                            class="btn btn-success text-uppercase fw-bold">Update</button>
+                            class="btn btn-light text-uppercase fw-bold">Update</button>
                     </div>
                 </div>
             </form>
@@ -149,8 +149,8 @@ function deleteCategory($category_id){
 
         <table class="table table-striped table-hover w-50 mx-auto text-center mt-5">
             <thead class="table-dark text-uppercase">
-                <th>Category ID</th>
-                <th>Category Name</th>
+                <th>ID</th>
+                <th>Name</th>
                 <th></th>
                 <th></th>
             </thead>

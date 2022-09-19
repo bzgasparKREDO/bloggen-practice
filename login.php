@@ -59,7 +59,7 @@ function getFullName($account_id){
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -75,18 +75,29 @@ function getFullName($account_id){
                 }
                 ?>
                 <form action="" method="post">
-                    <input type="text" name="username" class="form-control mb-4" placeholder="USERNAME" required autofocus>
-                    <input type="password" name="password" class="form-control mb-5" placeholder="PASSWORD" required>
-                    <button type="submit" name="btn_login" class="btn btn-success text-uppercase py-2 w-100">Enter</button>
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label for="username" class="small form-label">Username</label>
+                            <input type="text" name="username" id="username" class="form-control" placeholder="Username"
+                                required autofocus>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="password" class="small form-label">Password</label>
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="Password" required>
+                        </div>
+                    </div>
+                    <button type="submit" name="btn_login"
+                        class="btn btn-success text-uppercase py-2 w-100">Enter</button>
                 </form>
             </div>
             <div class="card-footer bg-white border-0">
                 <div class="row">
                     <div class="col-6 text-center">
-                        <a href="register.php" class="text-decoration-none text-dark">Create an Account</a>
+                        <a href="register.php" class="text-dark">Create an Account</a>
                     </div>
                     <div class="col-6 text-center">
-                        <h6><a href="recover.php" class="text-decoration-none text-dark">Recover Account</a></h6>
+                        <h6><a href="recover.php" class="text-dark">Recover Account</a></h6>
                     </div>
                 </div>
             </div>

@@ -5,12 +5,13 @@ include "connection.php";
 function displayAllPosts(){
     $conn = connection();
 
-    $sql = "SELECT * FROM posts INNER JOIN categories ON categories.category_id = posts.category_id INNER JOIN accounts ON accounts.account_id = posts.account_id ORDER BY date_posted";
+    $sql = "SELECT * FROM posts INNER JOIN categories ON categories.category_id = posts.category_id INNER JOIN accounts ON accounts.account_id = posts.account_id ORDER BY date_posted DESC";
 
     if($result = $conn->query($sql)){
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
-                echo "
+                if($row['account_id'] == $_SESSION['account_id']){
+                    echo "
                     <tr>
                         <td>".$row['post_id']."</td>
                         <td>".$row['post_title']."</td>
@@ -22,6 +23,19 @@ function displayAllPosts(){
                         </td>
                     </tr>
                 ";
+                }else{
+                    echo "
+                    <tr>
+                        <td>".$row['post_id']."</td>
+                        <td>".$row['post_title']."</td>
+                        <td>".$row['username']."</td>
+                        <td>".$row['category_name']."</td>
+                        <td>".$row['date_posted']."</td>
+                        <td>
+                        </td>
+                    </tr>
+                ";
+                }
             }
         } else {
             echo "<tr>
@@ -30,6 +44,41 @@ function displayAllPosts(){
                 </td>
             </tr>";
         }
+    } else {
+        die("Error: " . $conn->error);
+    }
+}
+function countPosts($account_id){
+    $conn = connection();
+    $sql = "SELECT COUNT(post_id) AS post_count FROM posts WHERE account_id = $account_id";
+
+    if($result = $conn->query($sql)){
+        $result_assoc = $result->fetch_assoc();
+        return $result_assoc['post_count'];
+    } else {
+        die("Error: " . $conn->error);
+    }
+}
+
+function countCategories(){
+    $conn = connection();
+    $sql = "SELECT COUNT(category_id) AS category_count FROM categories";
+
+    if($result = $conn->query($sql)){
+        $result_assoc = $result->fetch_assoc();
+        return $result_assoc['category_count'];
+    } else {
+        die("Error: " . $conn->error);
+    }
+}
+
+function countUsers(){
+    $conn = connection();
+    $sql = "SELECT COUNT(account_id) AS users_count FROM accounts WHERE `role` = 'U'";
+
+    if($result = $conn->query($sql)){
+        $result_assoc = $result->fetch_assoc();
+        return $result_assoc['users_count'];
     } else {
         die("Error: " . $conn->error);
     }
@@ -78,7 +127,7 @@ function displayAllPosts(){
     <main class="container">
         <h3 class="h4 text-muted fw-bold text-uppercase">All Posts</h3>
         <div class="row">
-            <div class="col-12">
+            <div class="col-9">
                 <table class="table table-striped table-hover">
                     <thead class="table-dark">
                         <th>#</th>
@@ -95,8 +144,34 @@ function displayAllPosts(){
                     </tbody>
                 </table>
             </div> 
+            <nav class="col-3">
+                <div class="card bg-primary mb-4 border-5">
+                    <div class="card-body text-center text-white">
+                        <h3>Posts</h3>
+                        <p class="fs-4"><i class="fas fa-pencil-alt"></i> <?= countPosts($_SESSION['account_id']); ?></p>
+                        <a href="posts.php" class="btn btn-outline-light btn-sm fw-bold text-uppercase">view</a>
+                    </div>
+                </div>
+                
+                <div class="card bg-success mb-4 border-5">
+                    <div class="card-body text-center text-white">
+                        <h3>Categories</h3>
+                        <p class="fs-4"><i class="far fa-folder-open"></i> <?= countCategories();?></p>
+                        <a href="categories.php" class="btn btn-outline-light btn-sm fw-bold text-uppercase">view</a>
+                    </div>
+                </div>
+
+                <div class="card bg-warning border-5">
+                    <div class="card-body text-center text-white">
+                        <h3>Users</h3>
+                        <p class="fs-4"><i class="fas fa-users"></i> <?= countUsers();?></p>
+                        <a href="users.php" class="btn btn-outline-light btn-sm fw-bold text-uppercase">view</a>
+                    </div>
+                </div>
+            </nav>
         </div>
     </main>
+    
 </body>
 
 </html>
