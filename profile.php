@@ -76,7 +76,23 @@ $user_details = getProfileDetails($_SESSION['account_id']);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/profile.css">
+    <style>
+    .avatar-icon i {
+        width: 12rem;
+        height: 12rem;
+        font-size: 9rem !important;
+        margin: auto;
+        padding: 15px 0 0 0;
+        background-color: rgb(231, 231, 231);
+    }
+
+    .avatar-icon img {
+        width: 12rem;
+        height: 12rem;
+        margin: auto;
+        margin-bottom: 15px;
+    }
+    </style>
 </head>
 
 <body>
